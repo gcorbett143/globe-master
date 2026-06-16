@@ -24,7 +24,8 @@ export function createStartScreen(onStart, onDaily) {
         <div style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 2;">
           Use the geography of the globe to find each city<br>
           Press <strong style="color:white;">SPACE</strong> to drop a package when you're overhead<br>
-          Score is based on how close you land to the city<br><br>
+          Score is based on how close you land to the city<br>
+          In daily mode, finish faster for a score multiplier up to <strong style="color:white;">1.5x</strong><br><br>
           <span style="color: rgba(255,255,255,0.5); font-size: 13px;">← → to turn &nbsp;|&nbsp; ↑ full speed &nbsp;|&nbsp; ↓ slow &nbsp;|&nbsp; SPACE to drop</span>
         </div>
       </div>
@@ -82,7 +83,7 @@ export function createStartScreen(onStart, onDaily) {
     easy: 'Cities everyone should know — 5 min timer',
     medium: 'Requires solid geography knowledge — 5 min timer',
     hard: 'Regional capitals and lesser-known cities — 5 min timer',
-    impossible: 'Truly obscure — good luck — 5 min timer'
+    impossible: 'Truly obscure. Good luck — 5 min timer'
   }
 
   let selectedDiff = 'easy'
