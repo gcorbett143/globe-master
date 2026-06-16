@@ -70,7 +70,7 @@ const keys = {}
 function getCityLabel(city) {
   if (!city) return ''
   if (city.region) return `${city.name}, ${city.region} — ${city.country}`
-  return `${city.name} — ${city.country}`
+  return `${city.name}, ${city.country}`
 }
 
 function getCurrentCity() {
