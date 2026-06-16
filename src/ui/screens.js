@@ -16,7 +16,7 @@ export function createStartScreen(onStart, onDaily) {
   `
   screen.innerHTML = `
     <div style="text-align: center; max-width: 640px; padding: 2rem;">
-      <div style="font-size: 48px; font-weight: bold; color: #ffdd00; margin-bottom: 8px; letter-spacing: 2px;">DELIVERY PILOT</div>
+      <div style="font-size: 48px; font-weight: bold; color: #ffdd00; margin-bottom: 8px; letter-spacing: 2px;">GLOBE MASTER</div>
       <div style="font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 32px; letter-spacing: 1px;">A GEOGRAPHY CHALLENGE</div>
 
       <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 32px; text-align: left;">
@@ -211,7 +211,7 @@ export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onR
   screen.innerHTML = `
     <div style="text-align: center; max-width: 520px; padding: 2rem;">
       <div style="font-size: 14px; color: rgba(255,255,255,0.5); letter-spacing: 2px; margin-bottom: 4px;">DAILY CHALLENGE</div>
-      <div style="font-size: 22px; font-weight: bold; color: #ffdd00; margin-bottom: 24px;">📦 Delivery Pilot #${dailyNumber}</div>
+      <div style="font-size: 22px; font-weight: bold; color: #ffdd00; margin-bottom: 24px;">Globe Master #${dailyNumber}</div>
 
       <div style="font-size: 32px; letter-spacing: 4px; margin-bottom: 24px;">${grid}</div>
 

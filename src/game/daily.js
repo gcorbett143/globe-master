@@ -63,5 +63,5 @@ export function buildShareText(dailyNumber, drops, finalScore, timeSeconds) {
 
   const grid = drops.map(d => emojiMap(d.miles)).join('')
 
-  return `📦 Delivery Pilot — Daily #${dailyNumber}\n${grid}\nScore: ${finalScore.toLocaleString()} | Time: ${timeStr}\nPlay at: globe-master-daily.vercel.app`
+  return `Globe Master — Daily #${dailyNumber}\n${grid}\nScore: ${finalScore.toLocaleString()} | Time: ${timeStr}\nPlay at: globe-master-daily.vercel.app`
 }
