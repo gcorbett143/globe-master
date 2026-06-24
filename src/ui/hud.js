@@ -135,7 +135,9 @@ export function createHUD() {
     compassNeedle,
     throttleFill,
     throttleLabel,
-    popupContainer
+    popupContainer,
+    compassContainer,
+    throttleContainer
   }
 }
 

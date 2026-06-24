@@ -179,7 +179,7 @@ function getRank(score) {
   return { emoji: '📦', title: 'LOST IN THE CLOUDS' }
 }
 
-export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onRestart) {
+export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onRestart, onExplore) {
   const screen = document.createElement('div')
   screen.style.cssText = `
     position: fixed;
@@ -240,7 +240,7 @@ export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onR
         line-height: 1.6;
       "></div>
 
-      <div style="display: flex; gap: 12px; justify-content: center;">
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
         <button id="copy-btn" style="
           background: #ffdd00;
           color: #000;
@@ -252,6 +252,17 @@ export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onR
           cursor: pointer;
           letter-spacing: 1px;
         ">📋 COPY RESULT</button>
+        <button id="explore-btn" style="
+          background: transparent;
+          color: #44ff88;
+          border: 1px solid #44ff88;
+          padding: 12px 28px;
+          font-size: 15px;
+          font-weight: bold;
+          border-radius: 8px;
+          cursor: pointer;
+          letter-spacing: 1px;
+        ">🌍 EXPLORE</button>
         <button id="restart-btn" style="
           background: transparent;
           color: white;
@@ -283,6 +294,12 @@ export function createDailyEndScreen(score, timeSeconds, drops, dailyNumber, onR
   screen.querySelector('#restart-btn').addEventListener('click', () => {
     screen.remove()
     onRestart()
+  })
+
+  screen.querySelector('#explore-btn').addEventListener('click', () => {
+    console.log('explore clicked')
+    screen.remove()
+    if (onExplore) onExplore()
   })
 
   return screen

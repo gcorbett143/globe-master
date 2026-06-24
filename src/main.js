@@ -7,6 +7,7 @@ import { createStartScreen, createEndScreen, createDailyEndScreen } from './ui/s
 import { createCityPins, setActivePin, getRandomCityIndex, CITIES, showCityReveal } from './world/cities.js'
 import { scoreDelivery, angularDistanceMiles } from './game/scoring.js'
 import { getDailySequence, getDailyNumber, getTimeMultiplier } from './game/daily.js'
+import { createExploreMode } from './ui/explore.js'
 
 // Scene
 const scene = new THREE.Scene()
@@ -43,6 +44,7 @@ let gameSeconds = 300
 let lastTime = performance.now()
 let gameOver = true
 let gameStarted = false
+let exploreActive = false
 
 // Game mode state
 let isDailyMode = false
@@ -228,6 +230,8 @@ function animate() {
         const packageLonDeg = Math.atan2(-pkg.mesh.position.z, pkg.mesh.position.x) * 180 / Math.PI
         const miles = angularDistanceMiles(packageLatDeg, packageLonDeg, target.lat, target.lon)
         const { points, message } = scoreDelivery(miles)
+        pkg.packageLatDeg = packageLatDeg
+        pkg.packageLonDeg = packageLonDeg
 
         totalScore += points
         hud.score.textContent = `Score: ${totalScore}`
@@ -236,7 +240,7 @@ function animate() {
         setTimeout(() => scene.remove(pkg.mesh), 1000)
 
         if (isDailyMode) {
-          dailyDrops.push({ miles, points })
+          dailyDrops.push({ miles, points, packageLatDeg, packageLonDeg })
           dailyDropIndex++
 
           if (dailyDropIndex >= 10) {
@@ -249,6 +253,29 @@ function animate() {
                 gameOver = true
                 hud.score.textContent = 'Score: 0'
                 showStartScreen()
+              }, () => {
+                // Hide HUD
+                hud.timer.style.display = 'none'
+                hud.score.style.display = 'none'
+                hud.cityName.style.display = 'none'
+                hud.compassContainer.style.display = 'none'
+                hud.throttleContainer.style.display = 'none'
+                plane.visible = false
+                exploreActive = true
+
+                createExploreMode(scene, camera, renderer, globe, dailyDrops, dailySequence, globeRadius, () => {
+                  hud.timer.style.display = 'block'
+                  hud.score.style.display = 'block'
+                  hud.cityName.style.display = 'block'
+                  hud.compassContainer.style.display = 'block'
+                  hud.throttleContainer.style.display = 'block'
+                  plane.visible = true
+                  exploreActive = false
+                  totalScore = 0
+                  gameOver = true
+                  hud.score.textContent = 'Score: 0'
+                  showStartScreen()
+                })
               })
             }, 2500)
           } else {
@@ -285,7 +312,9 @@ function animate() {
   camera.up.lerp(up, 0.12).normalize()
   camera.lookAt(plane.position)
 
-  renderer.render(scene, camera)
+  if (!exploreActive) {
+    renderer.render(scene, camera)
+  }
 }
 
 animate()
