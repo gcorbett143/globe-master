@@ -244,7 +244,7 @@ export function createExploreMode(scene, camera, renderer, globe, drops, dailySe
     letter-spacing: 1px;
     pointer-events: all;
   `
-  resetBtn.textContent = '⬆️ Reset North'
+  resetBtn.textContent = 'Reset North'
   overlay.appendChild(resetBtn)
 
   const exitBtn = document.createElement('button')
